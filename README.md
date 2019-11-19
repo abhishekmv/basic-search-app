@@ -20,7 +20,7 @@ If you have HTML/JavaScript experience, also work on some of the following:
   * Perform highlighting of the search term in the text results
   * Come up with and add a new feature to the UI, this can be anything your creativity can dream up.
   
-Please do as much as you can, and don’t be shy to expand the code into the areas that make sense to you. Spend a judicious amount of time writing the code. The app should be executable and runnable for our team to evaluate it, and the code should be in such state that you would feel OK to submit it for a peer code review and for the QA group to start testing it.
+Please do as much as you can, and don’t be shy to expand the code into the areas not mentioned above that make sense to you. Spend a judicious amount of time writing the code. The app should be executable and runnable for our team to evaluate it, and the code should be in such state that you would feel OK to submit it for a peer code review and for the QA group to start testing it.
 
 You are free to use CodeEnvy as your IDE and share your workspace, or you can develop locally and send over a zipped file. Our mail servers strip nearly everything, so send it by zipping and renaming the zip file as txt. Other options are to use the file share service, such as Dropbox or Google Drive, and send the link or share the work as private GitHub project. Email the final code to dbaranovsky1@evicore.com
 
