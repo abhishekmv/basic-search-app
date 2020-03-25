@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.qpidhealth.qpid.search.model.Patient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.ejb.LockType.READ;
@@ -18,17 +19,16 @@ import static javax.ejb.LockType.READ;
 @Singleton
 @Lock(READ)
 public class PatientService {
-    
-    @GET
-    @Path("/search")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Patient> searchPatients(@QueryParam("query") String query) {
-    	System.out.println("Hitting search endpoint"); // delete
-    	System.out.println("Query - " + query); //delete
-    	
-    	//fetch data
-        List<Patient> records = query.trim().isEmpty()||query.equals("undefined") ? DataProvider.getAllPatientData() : DataProvider.getFilteredPatientData(query);
-        
-        return records;
-    }
+
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Patient> searchPatients(@QueryParam("query") String query) {
+
+		List<Patient> records = (query == null || query.trim().isEmpty() || query.equals("undefined"))
+				? DataProvider.getAllPatientData()
+				: DataProvider.getFilteredPatientData(query);
+				
+		return records;
+	}
 }
