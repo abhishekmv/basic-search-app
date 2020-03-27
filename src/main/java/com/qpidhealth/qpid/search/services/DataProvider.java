@@ -12,88 +12,94 @@ import com.qpidhealth.qpid.search.model.Patient;
 
 public class DataProvider {
 
-	public static List<Patient> getAllPatientData() {
-		// Patient 1
-		List<String> docs = new ArrayList<String>();
-		docs.add("Patient Note:::6/20/2010:::" + resource("Mary_1"));
-		docs.add("Patient Note:::6/20/2010:::" + resource("Mary_2"));
-		Patient p1 = new Patient(1000000L, "Mary TestPerson", docs);
+    public static List<Patient> getAllPatientData() {
+        // Patient 1
+        List<String> docs = new ArrayList<String>();
+        docs.add("Patient Note:::6/20/2010:::" + resource("Mary_1"));
+        docs.add("Patient Note:::6/20/2010:::" + resource("Mary_2"));
+        Patient p1 = new Patient(1000000L, "Mary TestPerson", docs);
 
-		// Patient 2
-		List<String> docs2 = new ArrayList<String>();
-		docs2.add("Clinical Note:::4/6/2010:::" + resource("Joe_1"));
-		docs2.add("Summary:::7/2/2010:::" + resource("Joe_2"));
-		Patient p2 = new Patient(1000001L, "Joe TestPerson", docs2);
+        
+        
+        
+        
+        
+        // Patient 2
+        List<String> docs2 = new ArrayList<String>();
+        docs2.add("Clinical Note:::4/6/2010:::" + resource("Joe_1"));
+        docs2.add("Summary:::7/2/2010:::" + resource("Joe_2"));
+        Patient p2 = new Patient(1000001L, "Joe TestPerson", docs2);
 
-		// Patient 3
-		List<String> docs3 = new ArrayList<String>();
-		docs3.add("Patient Note:::8/3/2012:::" + resource("Sam_1"));
-		Patient p3 = new Patient(1000002L, "Sam TestPerson", docs3);
+        // Patient 3
+        List<String> docs3 = new ArrayList<String>();
+        docs3.add("Patient Note:::8/3/2012:::" + resource("Sam_1"));
+        Patient p3 = new Patient(1000002L, "Sam TestPerson", docs3);
 
-		List<Patient> results = new ArrayList<Patient>();
-		results.add(p1);
-		results.add(p2);
-		results.add(p3);
-		return results;
-	}
+        List<Patient> results = new ArrayList<Patient>();
+        results.add(p1);
+        results.add(p2);
+        results.add(p3);
+        return results;
+    }
 
-	public static List<Patient> getFilteredPatientData(String query) {
+    public static List<Patient> getFilteredPatientData(String query) {
 
-		List<Patient> results = new ArrayList<Patient>();
+        List<Patient> results = new ArrayList<Patient>();
 
-		// Patient 1
-		List<String> docs = new ArrayList<String>();
-		docs.add("Patient Note:::6/20/2010:::" + resource("Mary_1"));
-		docs.add("Patient Note:::6/20/2010:::" + resource("Mary_2"));
-		Patient p1 = new Patient(1000000L, "Mary TestPerson", docs);
+        // Patient 1
+        List<String> docs = new ArrayList<String>();
+        docs.add("Patient Note:::6/20/2010:::" + resource("Mary_1"));
+        docs.add("Patient Note:::6/20/2010:::" + resource("Mary_2"));
+        Patient p1 = new Patient(1000000L, "Mary TestPerson", docs);
 
-		if (isMatch(p1, query)) {
-			results.add(p1);
-		}
+        if (isMatch(p1, query)) {
+            results.add(p1);
+        }
 
-		// Patient 2
-		List<String> docs2 = new ArrayList<String>();
-		docs2.add("Clinical Note:::4/6/2010:::" + resource("Joe_1"));
-		docs2.add("Summary:::7/2/2010:::" + resource("Joe_2"));
-		Patient p2 = new Patient(1000001L, "Joe TestPerson", docs2);
+        // Patient 2
+        List<String> docs2 = new ArrayList<String>();
+        docs2.add("Clinical Note:::4/6/2010:::" + resource("Joe_1"));
+        docs2.add("Summary:::7/2/2010:::" + resource("Joe_2"));
+        Patient p2 = new Patient(1000001L, "Joe TestPerson", docs2);
 
-		if (isMatch(p2, query)) {
-			results.add(p2);
-		}
+        if (isMatch(p2, query)) {
+            results.add(p2);
+        }
 
-		// Patient 3
-		List<String> docs3 = new ArrayList<String>();
-		docs3.add("Patient Note:::8/3/2012:::" + resource("Sam_1"));
-		Patient p3 = new Patient(1000002L, "Sam TestPerson", docs3);
+        // Patient 3
+        List<String> docs3 = new ArrayList<String>();
+        docs3.add("Patient Note:::8/3/2012:::" + resource("Sam_1"));
+        Patient p3 = new Patient(1000002L, "Sam TestPerson", docs3);
 
-		if (isMatch(p3, query)) {
-			results.add(p3);
-		}
+        if (isMatch(p3, query)) {
+            results.add(p3);
+        }
 
-		return results;
-	}
+        return results;
+    }
 
-	private static String resource(String fileName) {
-		ClassLoader classLoader = PatientService.class.getClassLoader();
-		try {
-			return IOUtils.toString(classLoader.getResourceAsStream("documents/" + fileName + ".txt"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "Failed to retrieve resource " + fileName;
-		}
-	}
+    private static String resource(String fileName) {
+        ClassLoader classLoader = PatientService.class.getClassLoader();
+        try {
+            return IOUtils
+                    .toString(classLoader.getResourceAsStream("documents/" + fileName + ".txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to retrieve resource " + fileName;
+        }
+    }
 
-	private static boolean isMatch(Patient p, String query) {
-		if (StringUtils.containsIgnoreCase(p.getName(), query)) {
-			return true;
-		}
+    private static boolean isMatch(Patient p, String query) {
+        if (StringUtils.containsIgnoreCase(p.getName(), query)) {
+            return true;
+        }
 
-		Iterator<String> it = p.getDocuments().iterator();
-		while (it.hasNext()) {
-			if (StringUtils.containsIgnoreCase(it.next(), query)) {
-				return true;
-			}
-		}
-		return false;
-	}
+        Iterator<String> it = p.getDocuments().iterator();
+        while (it.hasNext()) {
+            if (StringUtils.containsIgnoreCase(it.next(), query)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

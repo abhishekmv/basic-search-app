@@ -20,15 +20,16 @@ import static javax.ejb.LockType.READ;
 @Lock(READ)
 public class PatientService {
 
-	@GET
-	@Path("/search")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Patient> searchPatients(@QueryParam("query") String query) {
+    @GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Patient> searchPatients(@QueryParam("query") String query) {
 
-		List<Patient> records = (query == null || query.trim().isEmpty() || query.equals("undefined"))
-				? DataProvider.getAllPatientData()
-				: DataProvider.getFilteredPatientData(query);
-				
-		return records;
-	}
+        List<Patient> records = (query == null || query.trim().isEmpty()
+                || query.equals("undefined"))
+                        ? DataProvider.getAllPatientData()
+                        : DataProvider.getFilteredPatientData(query);
+
+        return records;
+    }
 }
