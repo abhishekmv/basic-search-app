@@ -8,10 +8,21 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.qpidhealth.qpid.search.controller.PatientController;
 import com.qpidhealth.qpid.search.model.Patient;
 
+/**
+ * A class to provide data based on the search query
+ *
+ */
 public class DataProvider {
 
+    /**
+     * A method to provide all the patient results if no search word is provided
+     * 
+     * @return
+     *         A list of all patient object is returned 
+     */
     public static List<Patient> getAllPatientData() {
         // Patient 1
         List<String> docs = new ArrayList<String>();
@@ -19,11 +30,6 @@ public class DataProvider {
         docs.add("Patient Note:::6/20/2010:::" + resource("Mary_2"));
         Patient p1 = new Patient(1000000L, "Mary TestPerson", docs);
 
-        
-        
-        
-        
-        
         // Patient 2
         List<String> docs2 = new ArrayList<String>();
         docs2.add("Clinical Note:::4/6/2010:::" + resource("Joe_1"));
@@ -42,6 +48,14 @@ public class DataProvider {
         return results;
     }
 
+    /**
+     * A method to provide all the patient details that match the search word only
+     * 
+     * @param query
+     *          A String value
+     * @return
+     *          A list of patient details/object is returned that match the search word
+     */
     public static List<Patient> getFilteredPatientData(String query) {
 
         List<Patient> results = new ArrayList<Patient>();
@@ -79,7 +93,7 @@ public class DataProvider {
     }
 
     private static String resource(String fileName) {
-        ClassLoader classLoader = PatientService.class.getClassLoader();
+        ClassLoader classLoader = PatientController.class.getClassLoader();
         try {
             return IOUtils
                     .toString(classLoader.getResourceAsStream("documents/" + fileName + ".txt"));

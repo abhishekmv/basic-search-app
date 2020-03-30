@@ -7,10 +7,10 @@
 #rm server.pid
 
 # build jar
-#mvn clean install tomee:exec
+mvn clean install tomee:exec
 
 # debug mode 5005 port
-mvn clean install tomee:debug
+#mvn clean install tomee:debug
 
 # run in background and save pid
 java -jar target/ROOT-exec.jar

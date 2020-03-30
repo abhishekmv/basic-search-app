@@ -5,6 +5,9 @@ import java.util.Objects;
 
 import com.google.common.base.MoreObjects;
 
+/**
+ * A patient object class
+ */
 public class Patient {
     private final Long id;
     private final String name;
